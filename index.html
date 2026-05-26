@@ -296,6 +296,33 @@
     .manifesto-headline { font-size:36px; }
     footer { flex-wrap:wrap; gap:14px; padding:22px 24px; }
   }
+ .trailer-modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+    width:80%;
+    height:80%;
+    position:relative;
+}
+
+.close-modal{
+    position:absolute;
+    top:-40px;
+    right:0;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
 </style>
 </head>
 <body>
@@ -436,7 +463,7 @@
 
   <div class="portfolio-grid">
     <!-- 1 -->
-    <a href="https://vimeo.com/1195743705?share=copy&fl=sv&fe=ci" class="p_item" target="_blank">
+    <div class="p_item" onclick="openTrailer()">
       <div class="p-thumb">
         <div class="p-thumb-inner scene-1"></div>
         <div class="p-overlay"></div>
@@ -445,7 +472,7 @@
         <span class="p-name">ONDE ESTIVER, ESTAREI</span>
         <span class="p-year">2026</span>
       </div>
-   </a>
+   </div>
     <!-- 2 -->
     <div class="p-item">
       <div class="p-thumb">
@@ -597,4 +624,37 @@ const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.targ
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
 </body>
+ <div id="trailerModal" class="trailer-modal">
+
+    <div class="modal-content">
+
+        <span class="close-modal" onclick="closeTrailer()">×</span>
+
+        <iframe
+            id="trailerFrame"
+            width="100%"
+            height="100%"
+            src="https://vimeo.com/1195743705?share=copy&fl=sv&fe=ci"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</div>
+
+<script>
+
+function openTrailer() {
+    document.getElementById("trailerModal").style.display = "flex";
+}
+
+function closeTrailer() {
+    document.getElementById("trailerModal").style.display = "none";
+
+    let iframe=document.getElementById("trailerFrame");
+    iframe.src=iframe.src;
+}
+
+</script>
 </html>
