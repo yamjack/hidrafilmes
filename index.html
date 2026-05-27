@@ -244,7 +244,36 @@
   .manifesto-right { display: flex; align-items: center; }
   .manifesto-body { font-size: 12.5px; line-height: 2.05; color: var(--gray-light); font-weight: 300; }
   .manifesto-about { font-size: 12.5px; line-height: 2.05; color: var(--gray-light); font-weight: 300; }
+.contact-section{
+    padding: 70px 56px;
+    background: var(--dark2);
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
 
+.contact-title{
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.contact-email{
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: var(--gold);
+    text-decoration: none;
+    padding: 18px 30px;
+    border: 1px solid var(--gold);
+    transition: all .3s ease;
+}
+
+.contact-email:hover{
+    background: var(--gold);
+    color: var(--dark);
+}
   /* ── CLIENTS ─────────────────────────────────── */
   .clients {
     padding: 72px 56px 80px; background: var(--dark);
@@ -521,6 +550,15 @@
       <p class="manifesto-about">A Hidra Filmes é uma produtora especializada em pós-produção, oferecendo serviços de correção de cor, mixagem de som e trilha sonora para cinema, TV e plataformas de streaming (VOD). Com um olhar atento aos detalhes e um compromisso com a excelência visual e sonora, transformamos cada projeto em uma experiência cinematográfica única.</p>
     </div>
   </div>
+</section>
+
+ <section class="contact-section fade-up" id="contato">
+    <h2 class="contact-title">Contato</h2>
+
+    <a class="contact-email"
+       href="mailto:hidrafilmes@gmail.com">
+       hidrafilmes@gmail.com
+    </a>
 </section>
 
 <!-- ══ CLIENTS ════════════════════════════════════ -->
