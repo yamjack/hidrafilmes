@@ -61,18 +61,18 @@
   .vimeo-wrap {
     position: absolute; inset: 0; z-index: 0; overflow: hidden;
   }
-  .vimeo-wrap iframe {
-    position: absolute;
-    top: 50%; left: 50%;
-    /* scale up to always cover the container, keeping 16:9 ratio */
-    width: 100vw;
-    height: 56.25vw; /* 16:9 */
-    min-height: 100vh;
-    min-width: 177.78vh; /* 16:9 inverse */
-    transform: translate(-50%, -50%);
-    border: none;
-    pointer-events: none;
-  }
+ .vimeo-wrap iframe {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 100vw !important;
+  height: 56.25vw !important;   /* 16:9 */
+  min-height: 100vh !important;
+  min-width: 177.78vh !important;
+  transform: translate(-50%, -50%) !important;
+  border: 0 !important;
+  pointer-events: none;
+}
 
   /* dark overlay so nav/controls remain legible */
   .hero-overlay {
@@ -372,15 +372,14 @@
 <!-- ══ HERO ═════════════════════════════════════ -->
 <section class="hero" id="hero">
 
-<!-- CÓDIGO NOVO -->
-  <div class="vimeo-wrap">
-    <iframe
-      id="vimeoFrame"
-      src="https://player.vimeo.com/video/1243436157?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
+<div class="vimeo-wrap">
+  <iframe
+    id="vimeoFrame"
+    src="https://player.vimeo.com/video/1243436157?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
+    allow="autoplay; fullscreen"
+    allowfullscreen>
+  </iframe>
+</div>
 
   <div class="hero-overlay"></div>
   <span class="hero-label">FINALIZAÇÃO CINEMATOGRÁFICA</span>
