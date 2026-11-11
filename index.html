@@ -234,7 +234,6 @@
   .service-modal-close:hover{ opacity:1; color:var(--gold); }
   .service-modal-tag { display:block; font-size:8.5px; letter-spacing:0.3em; color:var(--gold); font-weight:400; text-transform:uppercase; margin-bottom:14px; }
   .service-modal-title { font-family:var(--font-display); font-size:42px; font-weight:300; line-height:1.05; color:var(--white); margin-bottom:22px; }
-  .service-modal-lead { font-family:var(--font-display); font-size:22px; font-style:italic; color:var(--off-white); line-height:1.4; margin-bottom:20px; }
   .service-modal-text { font-size:12px; line-height:1.95; color:var(--gray-light); margin-bottom:26px; }
   .service-modal-sub { font-size:9px; letter-spacing:0.28em; color:var(--white); font-weight:400; text-transform:uppercase; margin-bottom:14px; }
   .service-modal-list { list-style:none; margin-bottom:32px; }
@@ -504,7 +503,6 @@
     <button class="service-modal-close" id="closeService" aria-label="Fechar">×</button>
     <span class="service-modal-tag" id="smTag"></span>
     <h2 class="service-modal-title" id="smTitle"></h2>
-    <p class="service-modal-lead" id="smLead"></p>
     <p class="service-modal-text" id="smText"></p>
     <h3 class="service-modal-sub">O que está incluído</h3>
     <ul class="service-modal-list" id="smList"></ul>
@@ -622,7 +620,6 @@ const SERVICES = {
   mixagem: {
     tag: 'PÓS PRODUÇÃO DE ÁUDIO',
     title: 'MIXAGEM DE SOM',
-    lead: 'Som que sustenta a emoção da imagem.',
     text: 'A mixagem é a etapa em que diálogos, ambientes, efeitos e música se tornam uma única experiência sonora. Trabalhamos cada elemento para que a voz seja sempre clara, os silêncios tenham peso e a imersão chegue ao público do jeito que o filme pede, seja na sala de cinema, na TV ou no streaming.',
     items: [
       'Edição e limpeza de diálogos',
@@ -635,7 +632,6 @@ const SERVICES = {
   trilha: {
     tag: 'COMPOSIÇÃO ORIGINAL',
     title: 'TRILHA SONORA',
-    lead: 'Música criada sob medida para o seu filme.',
     text: 'Uma trilha original dá identidade à obra. Compomos a partir da narrativa, do ritmo da montagem e da emoção de cada cena, sem recorrer a bibliotecas genéricas. O resultado é uma música que pertence ao filme e não pode ser trocada por outra.',
     items: [
       'Conversa inicial sobre conceito, referências e atmosfera',
@@ -648,7 +644,6 @@ const SERVICES = {
   cor: {
     tag: 'COLOR GRADING',
     title: 'CORREÇÃO DE COR',
-    lead: 'A imagem que a câmera viu, elevada ao que a história pede.',
     text: 'A correção de cor une o rigor técnico à sensibilidade estética. Equilibramos exposição, contraste e tons de pele, mantendo a consistência entre os planos, e depois construímos o look que define a atmosfera do filme. Trabalhamos com padrões de cinema digital e HDR, para que a imagem se mantenha fiel em qualquer tela.',
     items: [
       'Balanceamento e continuidade entre as cenas',
@@ -664,7 +659,6 @@ function openService(key){
   const s = SERVICES[key]; if (!s) return;
   document.getElementById('smTag').textContent = s.tag;
   document.getElementById('smTitle').textContent = s.title;
-  document.getElementById('smLead').textContent = s.lead;
   document.getElementById('smText').textContent = s.text;
   document.getElementById('smCta').textContent = s.cta;
   document.getElementById('smList').innerHTML = s.items.map(i => '<li>' + i + '</li>').join('');
