@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hidra Filmes · Mixagem de som, trilha sonora e correção de cor</title>
-<meta name="description" content="Hidra Filmes é uma produtora especializada em pós-produção: mixagem de som, trilha sonora original e correção de cor para cinema, TV e streaming.">
-<meta property="og:title" content="Hidra Filmes">
-<meta property="og:description" content="Mixagem de som, trilha sonora original e correção de cor para cinema, TV e streaming.">
-<meta property="og:image" content="assets/logo-hidra-branco.png">
+<meta name="description" content="Hidra Filmes é uma produtora de pós-produção em São Paulo: mixagem de som, trilha sonora original, correção de cor e finalização completa para cinema, TV e streaming.">
+<link rel="canonical" href="https://hidrafilmes.com.br/">
+<meta property="og:title" content="Hidra Filmes · Pós-produção de som e imagem">
+<meta property="og:description" content="Mixagem de som, trilha sonora original, correção de cor e finalização completa para cinema, TV e streaming.">
+<meta property="og:image" content="https://hidrafilmes.com.br/assets/logo-hidra-branco.png">
+<meta property="og:url" content="https://hidrafilmes.com.br/">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,29 +21,21 @@
   :root {
     --gold: #c9a96e;
     --white: #f4f0eb;
-    --off-white: #ccc8c2;
+    --off-white: #d6d2cc;
     --dark: #0a0908;
     --dark2: #111010;
     --dark3: #181716;
-    --gray: #3e3c3a;
-    --gray-light: #6a6764;
+    --muted: #a39e98;       /* texto secundário — legível sobre o preto */
+    --dim: #6f6b67;         /* detalhes discretos */
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Montserrat', sans-serif;
   }
 
   html { scroll-behavior: smooth; }
-  body { background: var(--dark); color: var(--white); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; }
+  body { background: var(--dark); color: var(--white); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  a, button { cursor: pointer; }
 
-  /* CURSOR — só em dispositivos com mouse */
-  .cursor, .cursor-ring { display: none; }
-  @media (hover: hover) and (pointer: fine) {
-    body { cursor: none; }
-    a, button, .p-thumb, .play-btn, .bar-icon { cursor: none; }
-    .cursor { display: block; position: fixed; pointer-events: none; z-index: 10001; width: 6px; height: 6px; background: var(--white); border-radius: 50%; transform: translate(-50%,-50%); }
-    .cursor-ring { display: block; position: fixed; pointer-events: none; z-index: 10000; width: 30px; height: 30px; border: 1px solid rgba(255,255,255,0.35); border-radius: 50%; transform: translate(-50%,-50%); transition: width .35s, height .35s, border-color .25s; }
-  }
-
-  /* NAV */
+  /* ── NAV ─────────────────────────────────────── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
@@ -50,22 +44,19 @@
     transition: background .4s, backdrop-filter .4s;
   }
   nav.scrolled { background: rgba(10,9,8,0.97); backdrop-filter: blur(8px); }
-
   .logo-img { height: 56px; width: auto; display: block; }
-
-  .nav-links { display: flex; gap: 44px; list-style: none; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
   .nav-links a {
-    font-size: 10.5px; letter-spacing: 0.22em; color: var(--off-white);
+    font-size: 12px; letter-spacing: 0.2em; color: var(--off-white);
     text-decoration: none; font-weight: 400; position: relative; padding-bottom: 5px; transition: color .3s;
   }
   .nav-links a::after {
     content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-    height: 1px; background: var(--white); transform: scaleX(0); transform-origin: left; transition: transform .3s;
+    height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .3s;
   }
-  .nav-links a:hover, .nav-links a.active { color: var(--white); }
-  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { transform: scaleX(1); }
 
-  /* botão de menu (celular) */
   .menu-btn { display: none; background: none; border: 0; width: 34px; height: 24px; position: relative; z-index: 120; }
   .menu-btn span { position: absolute; left: 4px; right: 4px; height: 1px; background: var(--white); transition: transform .3s, opacity .3s; }
   .menu-btn span:nth-child(1) { top: 5px; }
@@ -75,8 +66,8 @@
   .menu-open .menu-btn span:nth-child(2) { opacity: 0; }
   .menu-open .menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* HERO */
-  .hero { position: relative; height: 100vh; min-height: 560px; overflow: hidden; background: #0a0908; }
+  /* ── HERO ────────────────────────────────────── */
+  .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; background: #0a0908; }
   .vimeo-wrap { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
   #vimeoFrame {
     position: absolute; top: 50%; left: 50%;
@@ -85,14 +76,27 @@
   }
   .hero-overlay {
     position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(to bottom, rgba(10,9,8,0.45) 0%, rgba(10,9,8,0.1) 40%, rgba(10,9,8,0.15) 70%, rgba(10,9,8,0.75) 100%);
+    background:
+      linear-gradient(to top, rgba(10,9,8,0.9) 0%, rgba(10,9,8,0.35) 38%, rgba(10,9,8,0.05) 60%, rgba(10,9,8,0.45) 100%),
+      linear-gradient(to right, rgba(10,9,8,0.55) 0%, transparent 60%);
   }
+  .hero-content { position: absolute; left: 56px; right: 56px; bottom: 104px; z-index: 2; max-width: 820px; }
+  .hero-tag { display: block; font-size: 11px; letter-spacing: 0.3em; color: var(--gold); font-weight: 400; margin-bottom: 18px; }
+  .hero-title { font-family: var(--font-display); font-weight: 300; font-size: 48px; line-height: 1.12; color: var(--white); margin-bottom: 30px; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-body); font-size: 11.5px; letter-spacing: 0.2em; font-weight: 500;
+    text-decoration: none; padding: 15px 26px; border: 1px solid var(--gold); transition: background .3s, color .3s, border-color .3s;
+  }
+  .btn-gold { background: var(--gold); color: var(--dark); }
+  .btn-gold:hover { background: transparent; color: var(--gold); }
+  .btn-ghost { color: var(--white); border-color: rgba(244,240,235,0.45); }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* VIDEO CONTROLS BAR */
   .video-bar {
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
     padding: 18px 32px 22px; display: flex; align-items: center; gap: 14px;
-    background: linear-gradient(to top, rgba(10,9,8,0.88) 0%, transparent 100%);
   }
   .play-btn {
     width: 26px; height: 26px; border-radius: 50%; background: none;
@@ -102,147 +106,168 @@
   .play-btn:hover { border-color: rgba(255,255,255,0.8); }
   .play-icon { width:0; height:0; border-style:solid; border-width:4.5px 0 4.5px 8px; border-color:transparent transparent transparent var(--white); margin-left:2px; }
   .pause-icon { width:8px; height:10px; border-left: 2.5px solid var(--white); border-right: 2.5px solid var(--white); }
-  .time-txt { font-size: 10.5px; letter-spacing:.05em; color:var(--off-white); white-space:nowrap; }
-  .prog-bar { flex:1; height:1px; background:rgba(255,255,255,0.18); position:relative; }
+  .time-txt { font-size: 11px; letter-spacing:.05em; color:var(--off-white); white-space:nowrap; }
+  .prog-bar { flex:1; height:1px; background:rgba(255,255,255,0.18); position:relative; cursor: pointer; }
   .prog-fill { height:100%; width:0%; background:var(--white); }
   .prog-dot { position:absolute; top:50%; left:0%; width:8px; height:8px; background:var(--white); border-radius:50%; transform:translate(-50%,-50%); }
   .bar-icons { display:flex; gap:14px; flex-shrink:0; color: var(--white); }
-  .bar-icon { width:17px; height:17px; opacity:.55; transition:opacity .2s; }
+  .bar-icon { width:18px; height:18px; opacity:.6; transition:opacity .2s; cursor: pointer; }
   .bar-icon:hover { opacity:1; }
 
-  /* SERVICES */
-  .services { background: var(--dark2); }
-  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid rgba(255,255,255,0.06); }
-  .service-card { padding: 32px 36px 36px; border-right: 1px solid rgba(255,255,255,0.06); position: relative; transition: background .3s; }
-  .service-card:last-child { border-right: none; }
-  .service-card:hover { background: rgba(255,255,255,0.025); }
-  .service-head { display: flex; flex-direction: column; margin-bottom: 12px; }
-  .service-icon-wrap { margin-bottom: 8px; }
-  .service-icon { width: 28px; height: 28px; display: block; }
-  .service-tag { font-size: 8.5px; letter-spacing: 0.3em; color: var(--gray-light); font-weight: 400; text-transform: uppercase; display: block; margin-bottom: 10px; }
-  .service-title { font-family: var(--font-display); font-size: 30px; font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 14px; letter-spacing: 0.01em; }
-  .service-desc { font-size: 11px; line-height: 1.85; color: var(--gray-light); font-weight: 300; margin-bottom: 24px; }
-  .service-link {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 9.5px; letter-spacing: 0.22em; color: var(--white);
-    text-decoration: none; font-weight: 400;
-    border-bottom: 1px solid rgba(255,255,255,0.28); padding-bottom: 4px;
-    transition: border-color .3s, color .3s;
-  }
-  .service-link::after { content:'—'; font-size: 10px; opacity:.5; margin-left:2px; }
-  .service-link:hover { border-color: var(--gold); color: var(--gold); }
+  /* ── EXIBIDO EM ──────────────────────────────── */
+  .clients { padding: 46px 56px; background: var(--dark2); border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .clients-tag { font-size: 10.5px; letter-spacing: 0.3em; color: var(--muted); font-weight: 400; display:block; margin-bottom: 30px; text-align: center; }
+  .clients-row { display:flex; align-items:center; justify-content:space-between; gap:22px 34px; flex-wrap:wrap; max-width: 1200px; margin: 0 auto; }
+  .cl { color: var(--dim); transition: color .3s; font-weight:600; letter-spacing:.06em; }
+  .cl:hover { color: var(--off-white); }
+  .cl-big   { font-size:17px; font-weight:700; }
+  .cl-mid   { font-size:14px; }
+  .cl-stack { font-size:12px; line-height:1.35; text-align:center; }
+  .cl-canal { height:40px; width:auto; opacity:.4; transition:opacity .3s; display:block; }
+  .cl-canal:hover { opacity:.85; }
 
-  /* PORTFOLIO */
-  .portfolio { padding: 52px 56px 60px; background: var(--dark); }
-  .portfolio-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; gap: 20px; }
-  .portfolio-tag { font-size: 8.5px; letter-spacing: 0.3em; color: var(--gray-light); font-weight: 400; display: block; margin-bottom: 6px; }
-  .portfolio-title { font-family: var(--font-display); font-size: 52px; font-weight: 300; line-height: 1; color: var(--white); }
+  /* ── SEÇÕES (base) ───────────────────────────── */
+  .section-tag { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); font-weight: 400; display: block; margin-bottom: 10px; }
+  .section-title { font-family: var(--font-display); font-size: 52px; font-weight: 300; line-height: 1; color: var(--white); }
+
+  /* ── PORTFOLIO ───────────────────────────────── */
+  .portfolio { padding: 84px 56px 90px; background: var(--dark); }
+  .portfolio-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; gap: 20px; }
   .view-all {
-    font-size: 9.5px; letter-spacing: 0.22em; color: var(--gray-light); text-decoration: none;
-    font-weight: 400; border-bottom: 1px solid rgba(255,255,255,0.18); padding-bottom: 4px;
-    transition: color .3s, border-color .3s; margin-bottom: 4px; display: inline-block; white-space: nowrap;
+    font-size: 11px; letter-spacing: 0.2em; color: var(--muted); text-decoration: none;
+    font-weight: 400; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 4px;
+    transition: color .3s, border-color .3s; white-space: nowrap;
   }
-  .view-all::after { content:'—'; margin-left:8px; font-size:10px; opacity:.4; }
-  .view-all:hover { color: var(--white); border-color: rgba(255,255,255,0.5); }
+  .view-all:hover { color: var(--white); border-color: var(--gold); }
 
-  .portfolio-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 44px 18px; }
   .p-thumb { aspect-ratio: 2/3; position: relative; overflow: hidden; display: block; width: 100%; border: 0; padding: 0; background: #111; }
   .p-thumb img { width:100%; height:100%; object-fit: cover; object-position: center top; display: block; transition: transform .6s ease; }
   .p-item:hover .p-thumb img { transform: scale(1.04); }
-  .p-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(10,9,8,0.55) 0%,transparent 48%); pointer-events:none; }
+  .p-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(10,9,8,0.5) 0%,transparent 45%); pointer-events:none; }
   .p-play {
     position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(.9);
-    width:64px; height:64px; border-radius:50%; border:1px solid rgba(255,255,255,0.7);
-    display:flex; align-items:center; justify-content:center; background: rgba(10,9,8,0.35);
+    width:60px; height:60px; border-radius:50%; border:1px solid rgba(255,255,255,0.75);
+    display:flex; align-items:center; justify-content:center; background: rgba(10,9,8,0.4);
     opacity:0; transition: opacity .35s, transform .35s; pointer-events:none;
   }
   .p-play::before { content:''; border-style:solid; border-width:9px 0 9px 15px; border-color:transparent transparent transparent var(--white); margin-left:4px; }
   .p-item:hover .p-play, .p-thumb:focus-visible .p-play { opacity:1; transform:translate(-50%,-50%) scale(1); }
   .p-soon {
-    position:absolute; left:16px; bottom:16px; font-size:8.5px; letter-spacing:.28em; color: var(--gold);
-    border:1px solid rgba(201,169,110,0.5); padding:6px 10px; background: rgba(10,9,8,0.6);
+    position:absolute; left:12px; bottom:12px; font-size:9.5px; letter-spacing:.24em; color: var(--gold);
+    border:1px solid rgba(201,169,110,0.5); padding:6px 10px; background: rgba(10,9,8,0.7);
   }
-  .p-info { padding: 16px 0 0; }
-  .p-name { font-size: 10px; letter-spacing: 0.22em; color: var(--white); font-weight: 400; display: block; margin-bottom: 4px; }
-  .p-year { font-size: 10px; letter-spacing: 0.12em; color: var(--gray-light); font-weight: 300; }
+  .p-info { padding-top: 16px; }
+  .p-name { font-size: 12.5px; letter-spacing: 0.14em; color: var(--white); font-weight: 500; display: block; margin-bottom: 7px; line-height: 1.45; }
+  .p-platform { font-size: 10.5px; letter-spacing: 0.22em; color: var(--gold); font-weight: 400; display: block; margin-bottom: 6px; }
+  .p-credits { font-size: 13px; color: var(--muted); line-height: 1.55; display: block; }
 
-  /* MANIFESTO */
-  .manifesto { position: relative; overflow: hidden; padding: 108px 56px; min-height: 380px; display: flex; align-items: center; background: #0e0d0c; }
-  .manifesto-grid {
-    position:absolute; inset:0;
+  /* ── SERVICES ────────────────────────────────── */
+  .services { padding: 84px 56px 90px; background: var(--dark2); }
+  .services-header { margin-bottom: 40px; }
+  .services-grid { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid rgba(255,255,255,0.08); }
+  .service-card { padding: 34px 30px 34px 0; margin-right: 30px; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; }
+  .service-card:last-child { border-right: none; margin-right: 0; }
+  .service-icon { width: 30px; height: 30px; display: block; margin-bottom: 14px; }
+  .service-tag { font-size: 10px; letter-spacing: 0.26em; color: var(--muted); font-weight: 400; display: block; margin-bottom: 10px; }
+  .service-title { font-family: var(--font-display); font-size: 31px; font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 14px; }
+  .service-desc { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 24px; flex: 1; }
+  .service-link {
+    align-self: flex-start; font-size: 11px; letter-spacing: 0.2em; color: var(--white);
+    text-decoration: none; font-weight: 400; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 4px;
+    transition: border-color .3s, color .3s;
+  }
+  .service-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── SOBRE ───────────────────────────────────── */
+  .about { position: relative; overflow: hidden; padding: 96px 56px; background: #0e0d0c; }
+  .about-grid-bg {
+    position:absolute; inset:0; pointer-events:none;
     background-image:
-      repeating-linear-gradient(0deg,transparent,transparent 34px,rgba(255,255,255,0.011) 34px,rgba(255,255,255,0.011) 35px),
-      repeating-linear-gradient(90deg,transparent,transparent 34px,rgba(255,255,255,0.011) 34px,rgba(255,255,255,0.011) 35px);
+      repeating-linear-gradient(0deg,transparent,transparent 34px,rgba(255,255,255,0.012) 34px,rgba(255,255,255,0.012) 35px),
+      repeating-linear-gradient(90deg,transparent,transparent 34px,rgba(255,255,255,0.012) 34px,rgba(255,255,255,0.012) 35px);
   }
-  .manifesto-glow { position:absolute; top:50%; left:5%; transform:translateY(-50%); width:480px; height:280px; background:radial-gradient(ellipse,rgba(95,65,25,0.14),transparent 70%); pointer-events:none; }
-  .manifesto-inner { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:88px; align-items:center; width:100%; }
-  .manifesto-headline { font-family: var(--font-display); font-size: 52px; font-weight: 300; line-height: 1.12; color: var(--white); }
-  .manifesto-about { font-size: 12.5px; line-height: 2.05; color: var(--gray-light); font-weight: 300; }
+  .about-inner { position: relative; display: grid; grid-template-columns: 1fr 1.25fr; gap: 80px; align-items: start; }
+  .about-title { font-family: var(--font-display); font-size: 46px; font-weight: 300; line-height: 1.12; margin-top: 4px; }
+  .about-text p { font-size: 15.5px; line-height: 1.9; color: var(--off-white); margin-bottom: 18px; }
+  .about-text p:last-child { margin-bottom: 0; }
 
-  /* CONTATO */
-  .contact-section { padding: 70px 56px; background: var(--dark2); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-  .contact-title { font-family: var(--font-display); font-size: 42px; font-weight: 300; margin-bottom: 12px; }
-  .contact-sub { font-size: 12px; color: var(--gray-light); margin-bottom: 28px; line-height: 1.8; }
-  .contact-email {
-    display: inline-block; font-size: 20px; font-weight: 600; letter-spacing: .08em;
-    color: var(--gold); text-decoration: none; padding: 18px 30px; border: 1px solid var(--gold);
-    transition: all .3s ease; word-break: break-all;
-  }
-  .contact-email:hover { background: var(--gold); color: var(--dark); }
+  .director { position: relative; margin-top: 72px; padding-top: 56px; border-top: 1px solid rgba(255,255,255,0.08); display: grid; grid-template-columns: 1fr 1.25fr; gap: 80px; }
+  .director-name { font-family: var(--font-display); font-size: 36px; font-weight: 300; line-height: 1.1; margin-bottom: 8px; }
+  .director-role { font-size: 11px; letter-spacing: 0.24em; color: var(--muted); }
+  .director-text p { font-size: 14.5px; line-height: 1.9; color: var(--muted); margin-bottom: 16px; }
+  .director-text em { font-style: italic; color: var(--off-white); }
+  .director-highlight { color: var(--off-white); }
 
-  /* CLIENTS */
-  .clients { padding: 72px 56px 80px; background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); }
-  .clients-tag { font-size: 8.5px; letter-spacing: 0.3em; color: var(--gray-light); font-weight: 400; display:block; margin-bottom: 52px; }
-  .clients-row { display:flex; align-items:center; justify-content:space-between; gap:24px 32px; flex-wrap:wrap; }
-  .cl { color: var(--gray); transition: color .3s; font-weight:500; letter-spacing:.04em; }
-  .cl:hover { color: var(--off-white); }
-  .cl-globo  { font-size:13px; font-weight:700; letter-spacing:.1em; }
-  .cl-sportv { font-size:13px; font-weight:600; letter-spacing:.06em; }
-  .cl-warner { font-size:11px; font-weight:600; letter-spacing:.05em; line-height:1.4; text-align:center; }
-  .cl-hbomax { font-size:14px; font-weight:500; letter-spacing:.03em; }
-  .cl-canal  { height:40px; width:auto; opacity:.35; transition:opacity .3s; display:block; }
-  .cl-canal:hover { opacity:.8; }
-  .cl-band   { font-size:18px; font-weight:700; letter-spacing:.04em; }
-  .cl-cnn    { font-size:13px; font-weight:700; letter-spacing:.06em; line-height:1.3; text-align:center; }
+  /* ── CONTATO ─────────────────────────────────── */
+  .contact-section { padding: 90px 56px; background: var(--dark2); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+  .contact-title { font-family: var(--font-display); font-size: 46px; font-weight: 300; margin-bottom: 14px; }
+  .contact-sub { font-size: 15px; color: var(--muted); margin: 0 auto 34px; line-height: 1.8; max-width: 560px; }
+  .contact-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-  /* FOOTER */
-  footer { padding: 26px 56px; background: var(--dark2); border-top: 1px solid rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:space-between; gap: 14px; }
-  .footer-copy { font-size: 8.5px; letter-spacing:.15em; color: var(--gray); font-weight:300; }
-  .footer-logo { height: 34px; width: auto; opacity: .45; }
+  /* ── FOOTER ──────────────────────────────────── */
+  footer { padding: 28px 56px; background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:space-between; gap: 14px; }
+  .footer-copy { font-size: 10px; letter-spacing:.14em; color: var(--dim); }
+  .footer-logo { height: 34px; width: auto; opacity: .5; }
   .footer-links { display:flex; gap:28px; list-style:none; }
-  .footer-links a { font-size:8.5px; letter-spacing:.2em; color:var(--gray); text-decoration:none; font-weight:400; transition:color .3s; }
+  .footer-links a { font-size:10px; letter-spacing:.2em; color:var(--muted); text-decoration:none; transition:color .3s; }
   .footer-links a:hover { color:var(--white); }
 
-  /* FADE UP */
+  /* ── WHATSAPP FLUTUANTE ─────────────────────── */
+  .wa-float {
+    position: fixed; right: 24px; bottom: 24px; z-index: 900;
+    width: 58px; height: 58px; border-radius: 50%; background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+    opacity: 0; transform: translateY(16px) scale(.9); pointer-events: none;
+    transition: opacity .35s, transform .35s;
+  }
+  .wa-float.show { opacity: 1; transform: none; pointer-events: auto; }
+  .wa-float:hover { transform: scale(1.06); }
+  .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+  .wa-float .wa-label {
+    position: absolute; right: 70px; white-space: nowrap; background: var(--dark3); color: var(--white);
+    font-size: 12px; letter-spacing: .04em; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.1);
+    opacity: 0; transform: translateX(6px); transition: opacity .25s, transform .25s; pointer-events: none;
+  }
+  .wa-float:hover .wa-label { opacity: 1; transform: none; }
+
+  /* ── FADE UP ─────────────────────────────────── */
   .fade-up { opacity:0; transform:translateY(28px); transition:opacity .85s ease, transform .85s ease; }
   .fade-up.visible { opacity:1; transform:translateY(0); }
 
-  /* MODAL DO TRAILER */
+  /* ── MODAL DO TRAILER ───────────────────────── */
   .trailer-modal { position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9500; display:flex; justify-content:center; align-items:center; padding: 24px; opacity:0; visibility:hidden; transition: opacity .3s, visibility .3s; }
   .trailer-modal.open { opacity:1; visibility:visible; }
   .modal-content { width: min(1100px, 100%); aspect-ratio: 16/9; position:relative; background:#000; }
   .modal-content iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-  .close-modal { position:absolute; top:-44px; right:0; color:var(--white); font-size:38px; line-height:1; background:none; border:0; opacity:.7; transition: opacity .3s, color .3s; }
+  .close-modal { position:absolute; top:-46px; right:0; color:var(--white); font-size:38px; line-height:1; background:none; border:0; opacity:.75; transition: opacity .3s, color .3s; }
   .close-modal:hover { opacity:1; color: var(--gold); }
 
-  /* MODAL DE SERVIÇOS */
+  /* ── MODAL DE SERVIÇOS ──────────────────────── */
   .service-modal { position:fixed; inset:0; z-index:9000; background:rgba(5,4,4,0.92); display:flex; justify-content:center; align-items:center; padding:24px; opacity:0; visibility:hidden; transition:opacity .4s, visibility .4s; }
   .service-modal.open{ opacity:1; visibility:visible; }
-  .service-modal-box { position:relative; width:100%; max-width:640px; max-height:88vh; overflow-y:auto; background:var(--dark3); border:1px solid rgba(255,255,255,0.08); padding:56px 52px 48px; transform:translateY(24px); transition:transform .4s; }
+  .service-modal-box { position:relative; width:100%; max-width:660px; max-height:88vh; overflow-y:auto; background:var(--dark3); border:1px solid rgba(255,255,255,0.08); padding:56px 52px 48px; transform:translateY(24px); transition:transform .4s; }
   .service-modal.open .service-modal-box{ transform:translateY(0); }
   .service-modal-close { position:absolute; top:18px; right:24px; font-size:34px; line-height:1; color:var(--white); background:none; border:0; opacity:.6; transition:opacity .3s, color .3s; }
   .service-modal-close:hover{ opacity:1; color:var(--gold); }
-  .service-modal-tag { display:block; font-size:8.5px; letter-spacing:0.3em; color:var(--gold); font-weight:400; text-transform:uppercase; margin-bottom:14px; }
+  .service-modal-tag { display:block; font-size:10.5px; letter-spacing:0.28em; color:var(--gold); text-transform:uppercase; margin-bottom:14px; }
   .service-modal-title { font-family:var(--font-display); font-size:42px; font-weight:300; line-height:1.05; color:var(--white); margin-bottom:22px; }
-  .service-modal-text { font-size:12px; line-height:1.95; color:var(--gray-light); margin-bottom:26px; }
-  .service-modal-sub { font-size:9px; letter-spacing:0.28em; color:var(--white); font-weight:400; text-transform:uppercase; margin-bottom:14px; }
+  .service-modal-text { font-size:14.5px; line-height:1.85; color:var(--muted); margin-bottom:28px; }
+  .service-modal-sub { font-size:10.5px; letter-spacing:0.26em; color:var(--white); font-weight:400; text-transform:uppercase; margin-bottom:12px; }
   .service-modal-list { list-style:none; margin-bottom:32px; }
-  .service-modal-list li { font-size:12px; line-height:1.8; color:var(--off-white); padding:9px 0 9px 22px; position:relative; border-bottom:1px solid rgba(255,255,255,0.05); }
-  .service-modal-list li::before { content:'—'; position:absolute; left:0; color:var(--gold); font-size:10px; top:11px; }
-  .service-modal-cta { display:inline-flex; align-items:center; gap:10px; font-size:9.5px; letter-spacing:0.22em; color:var(--white); text-decoration:none; font-weight:400; border-bottom:1px solid var(--gold); padding-bottom:4px; transition:color .3s; }
+  .service-modal-list li { font-size:14px; line-height:1.7; color:var(--off-white); padding:10px 0 10px 24px; position:relative; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .service-modal-list li::before { content:'—'; position:absolute; left:0; color:var(--gold); }
+  .service-modal-cta { display:inline-flex; font-size:11px; letter-spacing:0.2em; color:var(--white); text-decoration:none; border-bottom:1px solid var(--gold); padding-bottom:4px; transition:color .3s; }
   .service-modal-cta:hover{ color:var(--gold); }
 
-  /* RESPONSIVO */
+  /* ── RESPONSIVO ──────────────────────────────── */
+  @media (max-width:1100px) {
+    .portfolio-grid { grid-template-columns: repeat(3,1fr); }
+    .services-grid { grid-template-columns: repeat(2,1fr); }
+    .service-card { margin-right: 0; padding: 34px 30px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .service-card:nth-child(2n) { border-right: none; }
+  }
   @media (max-width:900px) {
     nav { padding:16px 24px; }
     nav.scrolled { backdrop-filter: none; } /* o blur prenderia o menu em tela cheia dentro da barra */
@@ -253,23 +278,30 @@
       flex-direction: column; align-items: center; justify-content: center; gap: 34px;
       opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
     }
-    .nav-links a { font-size: 13px; }
+    .nav-links a { font-size: 14px; }
     .menu-open .nav-links { opacity: 1; visibility: visible; }
+
+    .hero-content { left: 24px; right: 24px; bottom: 92px; }
+    .hero-title { font-size: 32px; }
     .video-bar { padding: 14px 20px 18px; }
-    .services-grid { grid-template-columns:1fr; }
-    .service-card { border-right:none; border-bottom:1px solid rgba(255,255,255,0.06); padding: 32px 24px; }
-    .portfolio-grid { grid-template-columns:repeat(2,1fr); }
-    .portfolio-title { font-size: 40px; }
-    .portfolio, .clients, .manifesto, .contact-section { padding-left:24px; padding-right:24px; }
-    .manifesto { padding-top: 72px; padding-bottom: 72px; }
-    .manifesto-inner { grid-template-columns:1fr; gap:36px; }
-    .manifesto-headline { font-size:36px; }
+
+    .clients, .portfolio, .services, .about, .contact-section { padding-left:24px; padding-right:24px; }
     .clients-row { justify-content: center; }
-    footer { flex-wrap:wrap; justify-content:center; text-align:center; padding:22px 24px; }
-    .contact-email { font-size: 15px; padding: 16px 20px; }
+    .portfolio, .services, .about { padding-top: 64px; padding-bottom: 70px; }
+    .section-title { font-size: 40px; }
+    .portfolio-grid { grid-template-columns: repeat(2,1fr); gap: 36px 14px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { border-right: none; padding: 30px 0; }
+    .about-inner, .director { grid-template-columns:1fr; gap:28px; }
+    .about-title { font-size: 36px; }
+    footer { flex-wrap:wrap; justify-content:center; text-align:center; padding:22px 24px 90px; }
+    .wa-float { right: 18px; bottom: 18px; }
+    .wa-float .wa-label { display: none; }
   }
   @media (max-width:520px) {
-    .portfolio-grid { grid-template-columns:1fr; gap: 28px; }
+    .hero-title { font-size: 28px; }
+    .btn { padding: 14px 20px; font-size: 11px; }
+    .p-credits { font-size: 12.5px; }
     .service-modal-box{ padding:48px 24px 32px; }
     .service-modal-title{ font-size:32px; }
   }
@@ -277,24 +309,18 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
-
 <!-- ══ NAV ══════════════════════════════════════ -->
 <nav id="nav">
   <a href="#" aria-label="Hidra Filmes — início">
     <img src="assets/logo-hidra-branco-web.png" alt="Hidra Filmes" class="logo-img">
   </a>
-
   <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-
   <ul class="nav-links" id="navLinks">
-    <li><a href="#" class="active">HOME</a></li>
-    <li><a href="#sobre">SOBRE</a></li>
-    <li><a href="#servicos">SERVIÇOS</a></li>
     <li><a href="#portfolio">PORTFÓLIO</a></li>
+    <li><a href="#servicos">SERVIÇOS</a></li>
+    <li><a href="#sobre">SOBRE</a></li>
     <li><a href="#contato">CONTATO</a></li>
   </ul>
 </nav>
@@ -302,16 +328,20 @@
 <!-- ══ HERO ═════════════════════════════════════ -->
 <section class="hero" id="hero">
   <div class="vimeo-wrap">
-    <iframe
-      id="vimeoFrame"
+    <iframe id="vimeoFrame"
       src="https://player.vimeo.com/video/1243436157?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
-      allow="autoplay; fullscreen; picture-in-picture"
-      title="Showreel Hidra Filmes"
-      allowfullscreen>
-    </iframe>
+      allow="autoplay; fullscreen; picture-in-picture" title="Showreel Hidra Filmes" allowfullscreen></iframe>
   </div>
-
   <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <span class="hero-tag">PÓS-PRODUÇÃO DE SOM E IMAGEM</span>
+    <h1 class="hero-title">Mixagem de som, trilha original e correção de cor para cinema, TV e streaming.</h1>
+    <div class="hero-ctas">
+      <a href="#portfolio" class="btn btn-gold">VER PORTFÓLIO</a>
+      <a href="#contato" class="btn btn-ghost">FALE COM A GENTE</a>
+    </div>
+  </div>
 
   <div class="video-bar">
     <button class="play-btn" id="playBtn" aria-label="Pausar vídeo">
@@ -337,157 +367,235 @@
   </div>
 </section>
 
-<!-- ══ SERVICES ══════════════════════════════════ -->
-<section class="services fade-up" id="servicos">
-  <div class="services-grid">
-
-    <div class="service-card">
-      <div class="service-head">
-        <div class="service-icon-wrap">
-          <svg class="service-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <polyline points="1,18 5,10 8,24 12,6 16,26 20,12 24,20 28,16 32,18 35,18" stroke="rgba(210,180,130,0.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <span class="service-tag">PÓS PRODUÇÃO DE ÁUDIO</span>
-      </div>
-      <h2 class="service-title">MIXAGEM<br>DE SOM</h2>
-      <p class="service-desc">Mixagem profissional para cinema, TV e streaming. Equilíbrio, clareza e imersão sonora.</p>
-      <a href="#" class="service-link" data-service="mixagem">SAIBA MAIS</a>
-    </div>
-
-    <div class="service-card">
-      <div class="service-head">
-        <div class="service-icon-wrap">
-          <svg class="service-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <line x1="22" y1="5" x2="22" y2="25" stroke="rgba(210,180,130,0.75)" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M22 5 C28 7, 30 11, 28 16" stroke="rgba(210,180,130,0.75)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <ellipse cx="18.5" cy="25.5" rx="5" ry="3.5" transform="rotate(-15 18.5 25.5)" fill="rgba(210,180,130,0.75)"/>
-          </svg>
-        </div>
-        <span class="service-tag">COMPOSIÇÃO ORIGINAL</span>
-      </div>
-      <h2 class="service-title">TRILHA<br>SONORA</h2>
-      <p class="service-desc">Trilhas originais que potencializam emoções e dão identidade ao seu filme.</p>
-      <a href="#" class="service-link" data-service="trilha">SAIBA MAIS</a>
-    </div>
-
-    <div class="service-card">
-      <div class="service-head">
-        <div class="service-icon-wrap">
-          <svg class="service-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <circle cx="18" cy="13" r="8" stroke="rgba(210,180,130,0.75)" stroke-width="1.5"/>
-            <circle cx="12" cy="24" r="8" stroke="rgba(210,180,130,0.75)" stroke-width="1.5"/>
-            <circle cx="24" cy="24" r="8" stroke="rgba(210,180,130,0.75)" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <span class="service-tag">COLOR GRADING</span>
-      </div>
-      <h2 class="service-title">CORREÇÃO<br>DE COR</h2>
-      <p class="service-desc">Correção de cor cinematográfica com padrão de cinema digital e HDR.</p>
-      <a href="#" class="service-link" data-service="cor">SAIBA MAIS</a>
-    </div>
-
+<!-- ══ EXIBIDO EM ════════════════════════════════ -->
+<section class="clients" id="clientes">
+  <span class="clients-tag">NOSSOS TRABALHOS FORAM EXIBIDOS EM</span>
+  <div class="clients-row">
+    <span class="cl cl-mid">HBO Max</span>
+    <span class="cl cl-stack">WARNER<br>BROS.</span>
+    <span class="cl cl-stack">CNN<br>BRASIL</span>
+    <span class="cl cl-mid">SporTV</span>
+    <span class="cl cl-mid">GLOBOPLAY</span>
+    <span class="cl cl-big">BAND</span>
+    <span class="cl cl-mid">COMBATE</span>
+    <img class="cl-canal" src="assets/logo-canal-azul.png" alt="Canal Azul">
   </div>
 </section>
 
 <!-- ══ PORTFOLIO ═════════════════════════════════
-     Para trocar/adicionar um trailer, edite o atributo data-video:
+     Para trocar/adicionar um trailer, edite data-video:
        YouTube → data-video="youtube:ID_DO_VIDEO"
        Vimeo   → data-video="vimeo:ID_DO_VIDEO"
-     Sem trailer → remova data-video e mantenha o selo "TRAILER EM BREVE".
+     Sem trailer → use <div class="p-thumb"> com o selo "TRAILER EM BREVE".
 ═══════════════════════════════════════════════ -->
 <section class="portfolio fade-up" id="portfolio">
   <div class="portfolio-header">
     <div>
-      <span class="portfolio-tag">ÚLTIMOS TRABALHOS</span>
-      <h2 class="portfolio-title">PORTFÓLIO</h2>
+      <span class="section-tag">TRABALHOS RECENTES</span>
+      <h2 class="section-title">Portfólio</h2>
     </div>
-    <a href="https://vimeo.com/hidrafilmes" target="_blank" rel="noopener" class="view-all">VER TODOS</a>
+    <a href="https://vimeo.com/hidrafilmes" target="_blank" rel="noopener" class="view-all">VER NO VIMEO</a>
   </div>
 
   <div class="portfolio-grid">
+
     <div class="p-item">
       <button class="p-thumb" data-video="youtube:EebZxPuRvyw" aria-label="Assistir trailer de Onde Estiver, Estarei">
-        <img src="assets/poster-onde-estiver-estarei.jpg" alt="Pôster do documentário Onde Estiver, Estarei" loading="lazy">
-        <div class="p-overlay"></div>
-        <span class="p-play"></span>
+        <img src="assets/poster-onde-estiver-estarei.jpg" alt="Pôster de Onde Estiver, Estarei" loading="lazy">
+        <div class="p-overlay"></div><span class="p-play"></span>
       </button>
       <div class="p-info">
         <span class="p-name">ONDE ESTIVER, ESTAREI</span>
-        <span class="p-year">2026</span>
+        <span class="p-platform">HBO MAX · WARNER</span>
+        <span class="p-credits">Trilha sonora original · Mixagem</span>
+      </div>
+    </div>
+
+    <div class="p-item">
+      <button class="p-thumb" data-video="youtube:--1V4Wod8QE" aria-label="Assistir trailer de Chape: Memórias do Oeste">
+        <img src="assets/poster-chape.jpg" alt="Pôster de Chape: Memórias do Oeste" loading="lazy">
+        <div class="p-overlay"></div><span class="p-play"></span>
+      </button>
+      <div class="p-info">
+        <span class="p-name">CHAPE: MEMÓRIAS DO OESTE</span>
+        <span class="p-platform">CINEMA</span>
+        <span class="p-credits">Correção de cor · Mixagem 5.1</span>
+      </div>
+    </div>
+
+    <div class="p-item">
+      <button class="p-thumb" data-video="youtube:G6ANFklU9kA" aria-label="Assistir trailer de Heróis do Futuro">
+        <img src="assets/poster-herois-do-futuro.jpg" alt="Pôster de Heróis do Futuro" loading="lazy">
+        <div class="p-overlay"></div><span class="p-play"></span>
+      </button>
+      <div class="p-info">
+        <span class="p-name">HERÓIS DO FUTURO</span>
+        <span class="p-platform">SPORTV</span>
+        <span class="p-credits">Correção de cor · Mixagem 2.0</span>
+      </div>
+    </div>
+
+    <div class="p-item">
+      <button class="p-thumb" data-video="youtube:KLzeW7KyvH8" aria-label="Assistir trailer de Umbanda: Brasil em Transe">
+        <img src="assets/poster-umbanda.jpg" alt="Pôster de Umbanda: Brasil em Transe" loading="lazy">
+        <div class="p-overlay"></div><span class="p-play"></span>
+      </button>
+      <div class="p-info">
+        <span class="p-name">UMBANDA: BRASIL EM TRANSE</span>
+        <span class="p-credits">Correção de cor · Mixagem</span>
       </div>
     </div>
 
     <div class="p-item">
       <button class="p-thumb" data-video="youtube:6JrluKsitnA" aria-label="Assistir trailer de Economia Geek">
-        <img src="assets/poster-economia-geek.jpg" alt="Pôster da série Economia Geek" loading="lazy">
-        <div class="p-overlay"></div>
-        <span class="p-play"></span>
+        <img src="assets/poster-economia-geek.jpg" alt="Pôster de Economia Geek" loading="lazy">
+        <div class="p-overlay"></div><span class="p-play"></span>
       </button>
       <div class="p-info">
         <span class="p-name">ECONOMIA GEEK</span>
-        <span class="p-year">2026</span>
+        <span class="p-platform">CNN BRASIL</span>
+        <span class="p-credits">Mixagem 2.0</span>
       </div>
     </div>
 
     <div class="p-item">
       <div class="p-thumb">
-        <img src="assets/poster-em-busca-da-onca-parda.jpg" alt="Pôster do documentário Em Busca da Onça Parda" loading="lazy">
-        <div class="p-overlay"></div>
-        <span class="p-soon">TRAILER EM BREVE</span>
+        <img src="assets/poster-rei-zulu.jpg" alt="Pôster de Rei Zulu: A Majestade Bárbara" loading="lazy">
+        <div class="p-overlay"></div><span class="p-soon">TRAILER EM BREVE</span>
+      </div>
+      <div class="p-info">
+        <span class="p-name">REI ZULU: A MAJESTADE BÁRBARA</span>
+        <span class="p-platform">COMBATE</span>
+        <span class="p-credits">Mixagem 2.0</span>
+      </div>
+    </div>
+
+    <div class="p-item">
+      <div class="p-thumb">
+        <img src="assets/poster-em-busca-da-onca-parda.jpg" alt="Pôster de Em Busca da Onça Parda" loading="lazy">
+        <div class="p-overlay"></div><span class="p-soon">TRAILER EM BREVE</span>
       </div>
       <div class="p-info">
         <span class="p-name">EM BUSCA DA ONÇA PARDA</span>
-        <span class="p-year">2026</span>
+        <span class="p-platform">BAND</span>
+        <span class="p-credits">Mixagem 2.0</span>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ══ MANIFESTO ═════════════════════════════════ -->
-<section class="manifesto fade-up" id="sobre">
-  <div class="manifesto-grid"></div>
-  <div class="manifesto-glow"></div>
-  <div class="manifesto-inner">
-    <div>
-      <h2 class="manifesto-headline">DA VISÃO À EMOÇÃO, NÓS REVELAMOS A ESSÊNCIA.</h2>
+<!-- ══ SERVIÇOS ══════════════════════════════════ -->
+<section class="services fade-up" id="servicos">
+  <div class="services-header">
+    <span class="section-tag">O QUE FAZEMOS</span>
+    <h2 class="section-title">Serviços</h2>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <polyline points="1,18 5,10 8,24 12,6 16,26 20,12 24,20 28,16 32,18 35,18" stroke="rgba(210,180,130,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="service-tag">ÁUDIO</span>
+      <h3 class="service-title">Mixagem<br>de som</h3>
+      <p class="service-desc">Edição de diálogos, sound design e mixagem final em estéreo (2.0) e 5.1, para cinema, TV e streaming.</p>
+      <a href="#" class="service-link" data-service="mixagem">SAIBA MAIS</a>
     </div>
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <line x1="22" y1="5" x2="22" y2="25" stroke="rgba(210,180,130,0.8)" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M22 5 C28 7, 30 11, 28 16" stroke="rgba(210,180,130,0.8)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <ellipse cx="18.5" cy="25.5" rx="5" ry="3.5" transform="rotate(-15 18.5 25.5)" fill="rgba(210,180,130,0.8)"/>
+      </svg>
+      <span class="service-tag">COMPOSIÇÃO ORIGINAL</span>
+      <h3 class="service-title">Trilha<br>sonora</h3>
+      <p class="service-desc">Música composta para o filme, a partir da narrativa e da montagem, com direitos definidos em contrato.</p>
+      <a href="#" class="service-link" data-service="trilha">SAIBA MAIS</a>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <circle cx="18" cy="13" r="8" stroke="rgba(210,180,130,0.8)" stroke-width="1.5"/>
+        <circle cx="12" cy="24" r="8" stroke="rgba(210,180,130,0.8)" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="8" stroke="rgba(210,180,130,0.8)" stroke-width="1.5"/>
+      </svg>
+      <span class="service-tag">COLOR GRADING</span>
+      <h3 class="service-title">Correção<br>de cor</h3>
+      <p class="service-desc">Continuidade entre planos, criação do look e entregas em SDR e HDR.</p>
+      <a href="#" class="service-link" data-service="cor">SAIBA MAIS</a>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <rect x="4" y="8" width="28" height="20" rx="1.5" stroke="rgba(210,180,130,0.8)" stroke-width="1.5"/>
+        <polyline points="11,18 16,23 25,13" stroke="rgba(210,180,130,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="service-tag">SOM, COR E ENTREGA</span>
+      <h3 class="service-title">Finalização<br>completa</h3>
+      <p class="service-desc">Toda a finalização do projeto com um único responsável, do primeiro corte à entrega para a plataforma.</p>
+      <a href="#" class="service-link" data-service="finalizacao">SAIBA MAIS</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SOBRE ═════════════════════════════════════ -->
+<section class="about fade-up" id="sobre">
+  <div class="about-grid-bg"></div>
+
+  <div class="about-inner">
     <div>
-      <p class="manifesto-about">A Hidra Filmes é uma produtora especializada em pós-produção, oferecendo serviços de correção de cor, mixagem de som e trilha sonora para cinema, TV e plataformas de streaming (VOD). Com um olhar atento aos detalhes e um compromisso com a excelência visual e sonora, transformamos cada projeto em uma experiência cinematográfica única.</p>
+      <span class="section-tag">SOBRE</span>
+      <h2 class="about-title">Pós-produção para cinema, TV e streaming</h2>
+    </div>
+    <div class="about-text">
+      <p>A Hidra Filmes é uma produtora de pós-produção fundada em 2018, em São Paulo. Fazemos mixagem de som, trilha sonora original e correção de cor para documentários, séries e filmes, com trabalhos exibidos em cinema, na TV e em plataformas de streaming.</p>
+      <p>Trabalhamos com um mixador parceiro fixo e coloristas convidados de acordo com cada projeto, sob coordenação direta da direção da empresa. Assim, montamos a equipe certa para cada obra e acompanhamos o trabalho até a entrega final, dentro das exigências técnicas de cada exibidor.</p>
+    </div>
+  </div>
+
+  <div class="director">
+    <div>
+      <span class="section-tag">DIREÇÃO</span>
+      <h3 class="director-name">Carlos Yamamoto</h3>
+      <span class="director-role">FUNDADOR E DIRETOR</span>
+    </div>
+    <div class="director-text">
+      <p>Produtor e bacharel em Comunicação Social, com 15 anos de experiência no audiovisual em funções que vão da câmera à supervisão de pós-produção, com foco em documentários.</p>
+      <p>Participou de produções como <em>Milton Bituca Nascimento</em> (Flávia Moraes), <em>Kobra – Auto Retrato</em> (Lina Chamie), <em>Eike – Tudo ou Nada</em> (Dida Andrade e Andradina Azevedo) e <em>30 Anos Blues</em>, premiado no Festival de Gramado. Foi diretor de produção por sete anos e produziu cinco temporadas da série <em>Figuras da Dança</em>, exibida pela TV Cultura e pelo Arte1. No exterior, integrou as produções premiadas <em>Félins, noir sur blanc</em> e <em>Peuples Racines</em>, da francesa Bonne Pioche.</p>
+      <p class="director-highlight">Atualmente é coordenador de pós-produção na Canal Azul, onde coordenou a pós-produção da série documental <em>Ronaldinho Gaúcho</em>, da Netflix, além de obras para Warner Bros., Globo, Fox e Band.</p>
     </div>
   </div>
 </section>
 
 <!-- ══ CONTATO ═══════════════════════════════════ -->
 <section class="contact-section fade-up" id="contato">
-  <h2 class="contact-title">CONTATO</h2>
-  <p class="contact-sub">Tem um filme ou série em finalização? Conte sobre o projeto e enviamos uma proposta.</p>
-  <a class="contact-email" href="mailto:hidrafilmes@gmail.com?subject=Projeto%20para%20finaliza%C3%A7%C3%A3o">hidrafilmes@gmail.com</a>
-</section>
-
-<!-- ══ EXIBIDO EM ════════════════════════════════ -->
-<section class="clients fade-up" id="clientes">
-  <span class="clients-tag">NOSSOS TRABALHOS FORAM EXIBIDOS EM</span>
-  <div class="clients-row">
-    <span class="cl cl-globo">GLOBOPLAY</span>
-    <span class="cl cl-sportv">SporTV</span>
-    <span class="cl cl-warner">WARNER<br>BROS.</span>
-    <span class="cl cl-hbomax">HBO Max</span>
-    <img class="cl-canal" src="assets/logo-canal-azul.png" alt="Canal Azul">
-    <span class="cl cl-band">BAND</span>
-    <span class="cl cl-cnn">CNN<br>Brasil</span>
+  <span class="section-tag">CONTATO</span>
+  <h2 class="contact-title">Tem um projeto em finalização?</h2>
+  <p class="contact-sub">Conte sobre o filme ou a série, o prazo e o que você precisa. Respondemos com uma proposta.</p>
+  <div class="contact-actions">
+    <a class="btn btn-gold wa-link" href="#" target="_blank" rel="noopener">WHATSAPP · (11) 98030-6241</a>
+    <a class="btn btn-ghost" href="mailto:hidrafilmes@gmail.com?subject=Projeto%20para%20finaliza%C3%A7%C3%A3o">HIDRAFILMES@GMAIL.COM</a>
   </div>
 </section>
 
 <!-- ══ FOOTER ════════════════════════════════════ -->
 <footer>
-  <span class="footer-copy">© HIDRA FILMES <span id="year">2026</span>. TODOS OS DIREITOS RESERVADOS.</span>
+  <span class="footer-copy">© HIDRA FILMES <span id="year">2026</span> · CNPJ 30.296.843/0001-48</span>
   <img src="assets/logo-hidra-branco-web.png" alt="Hidra Filmes" class="footer-logo">
   <ul class="footer-links">
     <li><a href="https://www.instagram.com/hidrafilmes" target="_blank" rel="noopener">INSTAGRAM</a></li>
     <li><a href="https://vimeo.com/hidrafilmes" target="_blank" rel="noopener">VIMEO</a></li>
   </ul>
 </footer>
+
+<!-- ══ WHATSAPP FLUTUANTE ═══════════════════════ -->
+<a class="wa-float wa-link" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp">
+  <span class="wa-label">Fale com a gente no WhatsApp</span>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+</a>
 
 <!-- ══ MODAL DO TRAILER ══════════════════════════ -->
 <div id="trailerModal" class="trailer-modal" aria-hidden="true">
@@ -514,22 +622,22 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ── Cursor (só com mouse) ── */
-if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-  const cur = document.getElementById('cursor'), ring = document.getElementById('cursor-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  (function anim(){
-    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-    rx += (mx - rx) * .11; ry += (my - ry) * .11;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(anim);
-  })();
-}
+/* ── WhatsApp ── */
+const WA_NUMBER = '5511980306241';
+const WA_TEXT = 'Olá! Vim pelo site da Hidra Filmes e gostaria de falar sobre um projeto.';
+const waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT);
+document.querySelectorAll('.wa-link').forEach(a => a.href = waUrl);
+const waFloat = document.getElementById('waFloat');
 
 /* ── Nav ── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+function onScroll(){
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+  // o botão flutuante aparece depois do vídeo de abertura, para não cobrir os controles dele
+  waFloat.classList.toggle('show', window.scrollY > window.innerHeight * 0.6);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 const menuBtn = document.getElementById('menuBtn');
 menuBtn.addEventListener('click', () => {
   const open = document.body.classList.toggle('menu-open');
@@ -582,14 +690,15 @@ document.getElementById('fsIcon').addEventListener('click', () => {
 });
 
 /* ── Aparecer ao rolar ── */
-const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: .1 });
+const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: .08 });
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
 /* ── Trailers ── */
 const trailerModal = document.getElementById('trailerModal');
 const trailerSlot = document.getElementById('trailerSlot');
 function videoUrl(spec){
-  const [host, id] = spec.split(':');
+  const i = spec.indexOf(':');
+  const host = spec.slice(0, i), id = spec.slice(i + 1);
   if (host === 'youtube') return 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
   if (host === 'vimeo')   return 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0';
   return '';
@@ -597,7 +706,6 @@ function videoUrl(spec){
 function openTrailer(spec){
   const url = videoUrl(spec);
   if (!url) return;
-  // o iframe é criado na hora e destruído ao fechar — assim o som para de verdade
   trailerSlot.innerHTML = '<iframe src="' + url + '" title="Trailer" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
   trailerModal.classList.add('open');
   trailerModal.setAttribute('aria-hidden', 'false');
@@ -605,6 +713,7 @@ function openTrailer(spec){
   player.pause().catch(() => {});
 }
 function closeTrailer(){
+  if (!trailerModal.classList.contains('open')) return;
   trailerModal.classList.remove('open');
   trailerModal.setAttribute('aria-hidden', 'true');
   trailerSlot.innerHTML = '';
@@ -618,33 +727,33 @@ trailerModal.addEventListener('click', e => { if (e.target === trailerModal) clo
 /* ── Serviços ── */
 const SERVICES = {
   mixagem: {
-    tag: 'PÓS PRODUÇÃO DE ÁUDIO',
-    title: 'MIXAGEM DE SOM',
-    text: 'A mixagem é a etapa em que diálogos, ambientes, efeitos e música se tornam uma única experiência sonora. Trabalhamos cada elemento para que a voz seja sempre clara, os silêncios tenham peso e a imersão chegue ao público do jeito que o filme pede, seja na sala de cinema, na TV ou no streaming.',
+    tag: 'ÁUDIO',
+    title: 'Mixagem de som',
+    text: 'Diálogos, ambientes, efeitos e música são editados e equilibrados para que a voz fique clara e o som funcione na sala de cinema, na TV e no streaming. A mixagem é feita no formato exigido pelo exibidor e conferida antes da entrega.',
     items: [
       'Edição e limpeza de diálogos',
       'Sound design e construção de ambientes',
-      'Mixagem final balanceada para cada plataforma de exibição',
-      'Masterização conforme os padrões de entrega (cinema, TV, streaming e festivais)'
+      'Mixagem final em estéreo (2.0) e 5.1',
+      'Masterização conforme os padrões de entrega de cada exibidor'
     ],
-    cta: 'TEM UM PROJETO EM FINALIZAÇÃO? FALE COM A GENTE'
+    cta: 'FALAR SOBRE O SOM DO SEU PROJETO'
   },
   trilha: {
     tag: 'COMPOSIÇÃO ORIGINAL',
-    title: 'TRILHA SONORA',
-    text: 'Uma trilha original dá identidade à obra. Compomos a partir da narrativa, do ritmo da montagem e da emoção de cada cena, sem recorrer a bibliotecas genéricas. O resultado é uma música que pertence ao filme e não pode ser trocada por outra.',
+    title: 'Trilha sonora',
+    text: 'A trilha é composta a partir da narrativa, do ritmo da montagem e do clima de cada cena, sem uso de bibliotecas de música prontas. Os direitos de uso são definidos em contrato.',
     items: [
       'Conversa inicial sobre conceito, referências e atmosfera',
       'Composição e arranjo originais',
       'Sincronização com a imagem, cena a cena',
-      'Entrega dos stems e da versão final, com direitos definidos em contrato'
+      'Entrega dos stems e da versão final'
     ],
-    cta: 'VAMOS CONVERSAR SOBRE O SOM DO SEU PROJETO'
+    cta: 'FALAR SOBRE A TRILHA DO SEU PROJETO'
   },
   cor: {
     tag: 'COLOR GRADING',
-    title: 'CORREÇÃO DE COR',
-    text: 'A correção de cor une o rigor técnico à sensibilidade estética. Equilibramos exposição, contraste e tons de pele, mantendo a consistência entre os planos, e depois construímos o look que define a atmosfera do filme. Trabalhamos com padrões de cinema digital e HDR, para que a imagem se mantenha fiel em qualquer tela.',
+    title: 'Correção de cor',
+    text: 'Primeiro equilibramos exposição, contraste e tons de pele, mantendo a continuidade entre os planos. Depois construímos o look do filme junto com a direção e a fotografia, com padrões de cinema digital e HDR.',
     items: [
       'Balanceamento e continuidade entre as cenas',
       'Criação do look e do grading final',
@@ -652,6 +761,18 @@ const SERVICES = {
       'Conferência técnica para cinema, TV, streaming e festivais'
     ],
     cta: 'ENVIE SEU MATERIAL E RECEBA UMA PROPOSTA'
+  },
+  finalizacao: {
+    tag: 'SOM, COR E ENTREGA',
+    title: 'Finalização completa',
+    text: 'Para produtoras que preferem tratar toda a finalização com um único fornecedor. Coordenamos som, trilha e cor em um só cronograma e acompanhamos o projeto até a aprovação do material pelo exibidor.',
+    items: [
+      'Planejamento do cronograma de finalização',
+      'Coordenação de mixagem, trilha e correção de cor',
+      'Conferência das especificações técnicas do exibidor',
+      'Preparação e acompanhamento das entregas'
+    ],
+    cta: 'FALAR SOBRE A FINALIZAÇÃO DO SEU PROJETO'
   }
 };
 const serviceModal = document.getElementById('serviceModal');
@@ -667,6 +788,7 @@ function openService(key){
   document.body.style.overflow = 'hidden';
 }
 function closeService(){
+  if (!serviceModal.classList.contains('open')) return;
   serviceModal.classList.remove('open');
   serviceModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
