@@ -200,10 +200,53 @@
   .director-highlight { color: var(--off-white); }
 
   /* ── CONTATO ─────────────────────────────────── */
-  .contact-section { padding: 90px 56px; background: var(--dark2); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-  .contact-title { font-family: var(--font-display); font-size: 46px; font-weight: 300; margin-bottom: 14px; }
-  .contact-sub { font-size: 15px; color: var(--muted); margin: 0 auto 34px; line-height: 1.8; max-width: 560px; }
-  .contact-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .contact-section { padding: 90px 56px; background: var(--dark2); border-top: 1px solid rgba(255,255,255,0.05); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
+  .contact-intro { position: sticky; top: 110px; }
+  .contact-title { font-family: var(--font-display); font-size: 46px; font-weight: 300; line-height: 1.1; margin-bottom: 18px; }
+  .contact-sub { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 34px; }
+  .contact-direct { font-size: 10.5px; letter-spacing: .26em; color: var(--muted); display: block; margin-bottom: 14px; }
+  .contact-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+
+  /* formulário */
+  .project-form { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 22px; }
+  .form-group-title { grid-column: 1 / -1; font-size: 10.5px; letter-spacing: .26em; color: var(--gold); padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 6px; padding-top: 22px; }
+  .form-group-title:first-child { border-top: 0; margin-top: 0; padding-top: 0; }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label, .field .label { font-size: 12.5px; color: var(--off-white); letter-spacing: .02em; }
+  .field label small, .field .label small { color: var(--dim); font-size: 11.5px; }
+  .field input, .field select, .field textarea {
+    width: 100%; background: #0c0b0a; color: var(--white); border: 1px solid rgba(255,255,255,0.14);
+    font-family: var(--font-body); font-size: 14.5px; font-weight: 300; padding: 13px 14px; border-radius: 0;
+    transition: border-color .25s; -webkit-appearance: none; appearance: none;
+  }
+  .field select {
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 20px) 55%, calc(100% - 15px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 40px;
+  }
+  .field textarea { min-height: 130px; resize: vertical; line-height: 1.6; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); }
+  .field input::placeholder, .field textarea::placeholder { color: #5d5955; }
+  .checks { display: flex; flex-wrap: wrap; gap: 10px; }
+  .check { position: relative; }
+  .check input { position: absolute; opacity: 0; pointer-events: none; }
+  .check span {
+    display: inline-block; font-size: 13px; color: var(--off-white); padding: 10px 16px;
+    border: 1px solid rgba(255,255,255,0.16); cursor: pointer; transition: border-color .2s, background .2s, color .2s; user-select: none;
+  }
+  .check input:checked + span { border-color: var(--gold); background: rgba(201,169,110,0.14); color: var(--white); }
+  .check input:focus-visible + span { outline: 1px solid var(--gold); outline-offset: 2px; }
+  .form-footer { grid-column: 1 / -1; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
+  .form-footer .btn { border: 1px solid var(--gold); font-family: var(--font-body); }
+  .form-footer .btn[disabled] { opacity: .6; cursor: wait; }
+  .form-note { font-size: 12px; color: var(--dim); }
+  .form-status { grid-column: 1 / -1; font-size: 14px; line-height: 1.7; display: none; padding: 16px 18px; border: 1px solid; }
+  .form-status.error { display: block; color: #e9b1a6; border-color: rgba(233,177,166,0.4); }
+  .form-success { display: none; border: 1px solid rgba(201,169,110,0.4); padding: 40px 36px; }
+  .form-success h3 { font-family: var(--font-display); font-size: 32px; font-weight: 300; margin-bottom: 12px; }
+  .form-success p { font-size: 14.5px; color: var(--muted); line-height: 1.8; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
   /* ── FOOTER ──────────────────────────────────── */
   footer { padding: 28px 56px; background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:space-between; gap: 14px; }
@@ -294,6 +337,9 @@
     .service-card { border-right: none; padding: 30px 0; }
     .about-inner, .director { grid-template-columns:1fr; gap:28px; }
     .about-title { font-size: 36px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+    .contact-intro { position: static; }
+    .contact-title { font-size: 38px; }
     footer { flex-wrap:wrap; justify-content:center; text-align:center; padding:22px 24px 90px; }
     .wa-float { right: 18px; bottom: 18px; }
     .wa-float .wa-label { display: none; }
@@ -302,6 +348,7 @@
     .hero-title { font-size: 28px; }
     .btn { padding: 14px 20px; font-size: 11px; }
     .p-credits { font-size: 12.5px; }
+    .project-form { grid-template-columns: 1fr; }
     .service-modal-box{ padding:48px 24px 32px; }
     .service-modal-title{ font-size:32px; }
   }
@@ -570,12 +617,113 @@
 
 <!-- ══ CONTATO ═══════════════════════════════════ -->
 <section class="contact-section fade-up" id="contato">
-  <span class="section-tag">CONTATO</span>
-  <h2 class="contact-title">Tem um projeto em finalização?</h2>
-  <p class="contact-sub">Conte sobre o filme ou a série, o prazo e o que você precisa. Respondemos com uma proposta.</p>
-  <div class="contact-actions">
-    <a class="btn btn-gold wa-link" href="#" target="_blank" rel="noopener">WHATSAPP · (11) 98030-6241</a>
-    <a class="btn btn-ghost" href="mailto:hidrafilmes@gmail.com?subject=Projeto%20para%20finaliza%C3%A7%C3%A3o">HIDRAFILMES@GMAIL.COM</a>
+  <div class="contact-grid">
+
+    <div class="contact-intro">
+      <span class="section-tag">CONTATO</span>
+      <h2 class="contact-title">Tem um projeto em finalização?</h2>
+      <p class="contact-sub">Preencha o formulário com as informações do projeto. Analisamos e entramos em contato com uma proposta.</p>
+      <span class="contact-direct">PREFERE FALAR DIRETO?</span>
+      <div class="contact-actions">
+        <a class="btn btn-gold wa-link" href="#" target="_blank" rel="noopener">WHATSAPP · (11) 98030-6241</a>
+        <a class="btn btn-ghost" href="mailto:hidrafilmes@gmail.com?subject=Projeto%20para%20finaliza%C3%A7%C3%A3o">HIDRAFILMES@GMAIL.COM</a>
+      </div>
+    </div>
+
+    <div>
+      <!-- Formulário enviado pelo Web3Forms (web3forms.com). As respostas chegam por e-mail. -->
+      <form class="project-form" id="projectForm" novalidate>
+        <span class="form-group-title">SOBRE VOCÊ</span>
+        <div class="field">
+          <label for="f-nome">Nome *</label>
+          <input id="f-nome" name="Nome" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-empresa">Produtora / empresa <small>(opcional)</small></label>
+          <input id="f-empresa" name="Produtora / empresa" type="text" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="f-email">E-mail</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" placeholder="nome@exemplo.com">
+        </div>
+        <div class="field">
+          <label for="f-tel">Telefone / WhatsApp</label>
+          <input id="f-tel" name="Telefone" type="tel" autocomplete="tel" placeholder="(11) 90000-0000">
+        </div>
+
+        <span class="form-group-title">SOBRE O PROJETO</span>
+        <div class="field full">
+          <label for="f-projeto">Nome do projeto *</label>
+          <input id="f-projeto" name="Projeto" type="text" required>
+        </div>
+        <div class="field">
+          <label for="f-genero">Gênero</label>
+          <select id="f-genero" name="Gênero">
+            <option value="">Selecione</option>
+            <option>Documentário</option>
+            <option>Ficção</option>
+            <option>Animação</option>
+            <option>Reality / entretenimento</option>
+            <option>Publicidade / institucional</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-formato">Formato</label>
+          <select id="f-formato" name="Formato">
+            <option value="">Selecione</option>
+            <option>Longa-metragem</option>
+            <option>Média-metragem</option>
+            <option>Curta-metragem</option>
+            <option>Série</option>
+            <option>Programa de TV</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-duracao">Minutagem total</label>
+          <input id="f-duracao" name="Minutagem total" type="text" placeholder="Ex.: 90 min ou 6 ep. × 26 min">
+        </div>
+        <div class="field">
+          <label for="f-etapa">Em que etapa está?</label>
+          <select id="f-etapa" name="Etapa">
+            <option value="">Selecione</option>
+            <option>Em captação / filmagem</option>
+            <option>Em montagem</option>
+            <option>Montagem finalizada (corte final)</option>
+            <option>Já em finalização</option>
+            <option>Ainda em planejamento</option>
+          </select>
+        </div>
+        <div class="field full">
+          <span class="label">Serviços de que precisa</span>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="servico" value="Mixagem de som"><span>Mixagem de som</span></label>
+            <label class="check"><input type="checkbox" name="servico" value="Trilha sonora"><span>Trilha sonora</span></label>
+            <label class="check"><input type="checkbox" name="servico" value="Correção de cor"><span>Correção de cor</span></label>
+            <label class="check"><input type="checkbox" name="servico" value="Finalização completa"><span>Finalização completa</span></label>
+            <label class="check"><input type="checkbox" name="servico" value="Ainda não sei"><span>Ainda não sei</span></label>
+          </div>
+        </div>
+        <div class="field full">
+          <label for="f-desc">Breve descrição do projeto</label>
+          <textarea id="f-desc" name="Descrição" placeholder="Sobre o que é, onde vai ser exibido, prazo de entrega…"></textarea>
+        </div>
+
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="form-status" id="formStatus" role="alert"></div>
+        <div class="form-footer">
+          <button type="submit" class="btn btn-gold" id="formSubmit">ENVIAR PROJETO</button>
+          <span class="form-note">* obrigatório · informe e-mail ou telefone</span>
+        </div>
+      </form>
+
+      <div class="form-success" id="formSuccess" role="status">
+        <h3>Recebemos o seu projeto.</h3>
+        <p>Obrigado pelas informações. Vamos analisar e entrar em contato em breve pelo e-mail ou telefone informado.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -588,7 +736,7 @@
 <!-- ══ WHATSAPP FLUTUANTE ═══════════════════════ -->
 <a class="wa-float wa-link" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp">
   <span class="wa-label">Fale com a gente no WhatsApp</span>
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 
 <!-- ══ MODAL DO TRAILER ══════════════════════════ -->
@@ -622,6 +770,67 @@ const WA_TEXT = 'Olá! Vim pelo site da Hidra Filmes e gostaria de falar sobre u
 const waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT);
 document.querySelectorAll('.wa-link').forEach(a => a.href = waUrl);
 const waFloat = document.getElementById('waFloat');
+
+/* ── Formulário de projeto (Web3Forms) ── */
+// Chave de acesso pública do Web3Forms: define para qual e-mail as respostas vão.
+const WEB3FORMS_KEY = 'COLE_AQUI_A_CHAVE_DO_WEB3FORMS';
+const form = document.getElementById('projectForm');
+const formStatus = document.getElementById('formStatus');
+const formSubmit = document.getElementById('formSubmit');
+function showError(msg){ formStatus.textContent = msg; formStatus.className = 'form-status error'; }
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  formStatus.className = 'form-status';
+  const fd = new FormData(form);
+  if (fd.get('botcheck')) return;
+  const nome = (fd.get('Nome') || '').trim();
+  const projeto = (fd.get('Projeto') || '').trim();
+  const email = (fd.get('email') || '').trim();
+  const tel = (fd.get('Telefone') || '').trim();
+  if (!nome || !projeto) return showError('Preencha o seu nome e o nome do projeto.');
+  if (!email && !tel) return showError('Informe um e-mail ou um telefone para que possamos responder.');
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('O e-mail parece incompleto. Confira, por favor.');
+
+  const data = {
+    access_key: WEB3FORMS_KEY,
+    subject: 'Novo projeto pelo site: ' + projeto,
+    from_name: 'Site Hidra Filmes',
+    botcheck: false
+  };
+  for (const [k, v] of fd.entries()) {
+    if (k === 'servico' || k === 'botcheck') continue;
+    if (String(v).trim()) data[k] = String(v).trim();
+  }
+  const servicos = fd.getAll('servico');
+  if (servicos.length) data['Serviços'] = servicos.join(', ');
+  if (email) data.replyto = email;
+
+  // Enquanto a chave do Web3Forms não for configurada, o formulário abre o e-mail do visitante já preenchido.
+  if (!WEB3FORMS_KEY || WEB3FORMS_KEY.startsWith('COLE_AQUI')) {
+    const body = Object.entries(data)
+      .filter(([k]) => !['access_key','subject','from_name','botcheck','replyto'].includes(k))
+      .map(([k, v]) => k.charAt(0).toUpperCase() + k.slice(1) + ': ' + v).join('\n');
+    window.location.href = 'mailto:hidrafilmes@gmail.com?subject=' + encodeURIComponent(data.subject) + '&body=' + encodeURIComponent(body);
+    return;
+  }
+
+  formSubmit.disabled = true; formSubmit.textContent = 'ENVIANDO…';
+  try {
+    const r = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const res = await r.json().catch(() => ({}));
+    if (!r.ok || !res.success) throw new Error(res.message || 'erro');
+    form.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  } catch (err) {
+    showError('Não foi possível enviar agora. Tente de novo em instantes ou fale com a gente pelo WhatsApp.');
+  } finally {
+    formSubmit.disabled = false; formSubmit.textContent = 'ENVIAR PROJETO';
+  }
+});
 
 /* ── Nav ── */
 const nav = document.getElementById('nav');
